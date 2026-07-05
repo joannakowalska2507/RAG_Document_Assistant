@@ -1,0 +1,23 @@
+
+services:
+  app:
+    build: .
+    container_name: rag_app
+
+    ports:
+      - "5000:5000"
+
+    env_file:
+      - .env
+
+    volumes:
+      # ChromaDB
+      - ./chroma_db:/app/chroma_db
+
+      # Uploady PDF
+      - ./docs:/app/docs
+
+      # SQLite
+      - ./app.db:/app/app.db
+
+    restart: unless-stopped

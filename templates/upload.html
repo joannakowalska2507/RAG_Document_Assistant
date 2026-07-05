@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-50">
+
+<div class="flex h-screen">
+
+ <!-- Sidebar -->
+    <aside class="w-64 bg-neutral-100 text-black p-4 flex flex-col border-r border-gray-300">
+        <nav class="flex flex-col gap-2">
+            <a href="/" class="text-lg font-bold  p-2" >RAG Assistant</a>
+            <a href="/" class="p-2 rounded hover:bg-purple-300">Zadaj pytanie </a>
+            <a href="/upload" class=" p-2 rounded hover:bg-purple-300">Dodaj plik do bazy wiedzy
+            </a>
+            <a href="/view_docs" class="p-2 rounded hover:bg-purple-300">Baza wiedzy </a>
+            <a href="/history" class="p-2 rounded hover:bg-purple-300">Historia pytań</a>
+            <a href="/description" class="p-2 rounded hover:bg-purple-300">O projekcie </a>
+        </nav>
+
+    </aside>
+
+    <div class="flex-1 bg-gray-100 min-h-0">
+          <div class="h-full overflow-y-auto">
+                  <div class="flex justify-center items-center min-h-full">
+
+
+          <form
+            onsubmit="upload(); return false;" id="form" enctype="multipart/form-data"
+             class="w-full max-w-3xl bg-white p-6 rounded-2xl shadow-lg space-y-4">
+
+            <h2 class="text-2xl font-bold text-gray-800">
+              Dodaj dokument
+            </h2>
+
+            <p class="text-gray-500 text-sm">
+              Prześlij PDF, TXT lub DOCX do bazy wiedzy
+            </p>
+
+            <label class="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-purple-300 rounded-2xl cursor-pointer hover:bg-purple-50 transition">
+
+              <div class="flex flex-col items-center">
+                <span class="text-4xl">📄</span>
+
+                <p class="mt-2 text-gray-600">
+                  Kliknij aby wybrać plik
+                </p>
+
+                <p class="text-xs text-gray-400">
+                  PDF, DOCX, TXT
+                </p>
+              </div>
+
+                <input type="file"
+                       name="file"
+                       id="fileInput"
+                       accept=".pdf,.txt,.docx"
+                       multiple
+                       hidden
+                       onchange="addFiles()">
+            </label>
+             <div id="file-list"  ></div>
+
+            <button
+              type="submit"
+              class="w-full p-3 rounded-xl bg-purple-500 text-white font-semibold hover:bg-purple-600 transition shadow-md"
+            >
+              Dodaj do bazy wiedzy
+            </button>
+
+          </form>
+                    <div class=" hidden w-full max-w-3xl bg-white p-6 rounded-2xl shadow-lg space-y-4 text-purple-600 text-center"
+                       id="msg" ></div>
+
+                  </div>
+          </div>
+    </div>
+</div>
+<script>
+let fileStore = new DataTransfer();
+
+function addFiles() {
+
+    const input = document.getElementById("fileInput");
+
+    // dodaj nowe pliki do "magazynu"
+    for (const file of input.files) {
+        fileStore.items.add(file);
+    }
+
+    // podmień input.files na naszą listę
+    input.files = fileStore.files;
+
+    renderList();
+}
+function renderList() {
+
+    const list = document.getElementById("file-list");
+    list.innerHTML = "";
+
+    for (let i = 0; i < fileStore.files.length; i++) {
+
+        const file = fileStore.files[i];
+
+        list.innerHTML += `
+               <div class="flex justify-between items-center bg-purple-100 p-2 rounded-lg mt-2">
+
+                   <span>📄 ${file.name}</span>
+
+                   <button
+                       type="button"
+                       onclick="removeFile(${i})"
+                       class="text-red-500 font-bold"
+                   >
+                        ✖️
+                   </button>
+
+               </div>
+            `;
+        }
+
+}
+function removeFile(index) {
+
+    const newStore = new DataTransfer();
+    const input = document.getElementById("fileInput");
+
+    for (let i = 0; i < fileStore.files.length; i++) {
+
+        if (i !== index) {
+            newStore.items.add(fileStore.files[i]);
+        }
+    }
+
+    fileStore = newStore;
+
+    input.files = fileStore.files;
+
+    renderList();
+}
+function upload() {
+
+    const formData = new FormData();
+
+    for (const file of fileStore.files) {
+        formData.append("files", file);
+    }
+
+    fetch("/upload-file", {
+        method: "POST",
+        body: formData
+    })
+    .then(async (response) =>  {
+        const data = await response.json();
+        if (!response.ok) {
+        document.getElementById("msg").innerText = data.error;
+        document.getElementById("msg").classList.remove("hidden");
+        document.getElementById("form").style.display = "none";
+        document.getElementById("msg").classList.add("text-red-500");
+        return;
+        }
+        document.getElementById("msg").classList.remove("hidden");
+        document.getElementById("form").style.display = "none";
+        document.getElementById("msg").innerText = data.message;
+
+    });
+
+}
+</script>
+</body>
+</html>

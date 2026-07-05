@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-neutral-50">
+
+<div class="flex h-screen">
+
+ <!-- Sidebar -->
+    <aside class="w-64 bg-neutral-100 text-black p-4 flex flex-col border-r border-gray-300">
+        <nav class="flex flex-col gap-2">
+            <a href="/" class="text-lg font-bold  p-2" >RAG Assistant</a>
+            <a href="/" class="p-2 rounded hover:bg-purple-300">Zadaj pytanie </a>
+            <a href="/upload" class=" p-2 rounded hover:bg-purple-300">Dodaj plik do bazy wiedzy
+            </a>
+            <a href="/view_docs" class="p-2 rounded hover:bg-purple-300">Baza wiedzy  </a>
+            <a href="/history" class="p-2 rounded hover:bg-purple-300">Historia pytań</a>
+            <a href="/description" class="p-2 rounded hover:bg-purple-300">O projekcie </a>
+        </nav>
+
+    </aside>
+
+
+    <div class="flex-1 h-screen flex  flex-col">
+
+
+        <div id="chat" class="flex-1 overflow-y-auto p-20 hidden" ></div>
+
+        <div id="inputWrapper" class=" flex-1  flex flex-col items-center justify-center gap-4">
+            <div id="rag" > <h3 class="text-xl " > Rag Assistant - zapytaj swoje dokumenty!</h3></div>
+
+            <form onsubmit="ask(); return false;" class="flex flex-col gap-4 w-full max-w-xl "  id="form">
+
+                <input class="w-full max-w-xl border p-2 rounded-lg" id="question" placeholder="Zadaj pytanie">
+                <button  type="submit" class="w-full max-w-xl p-2 border rounded-xl bg-purple-500 text-white hover:bg-purple-600 " >Wyślij</button>
+
+            </form>
+        </div>
+        </div>
+
+    </div>
+</div>
+
+
+    <script>
+    let conversationId = null;
+    async function ask() {
+        const chat = document.getElementById("chat");
+        const input = document.getElementById("question");
+        const question = input.value;
+        const wrapper = document.getElementById("inputWrapper");
+        const form = document.getElementById("form");
+        if (!question) return;
+
+        document.getElementById("rag").classList.add("hidden");
+        chat.classList.remove("hidden")
+
+        chat.insertAdjacentHTML("beforeend",
+          `<div class="flex justify-end">
+                 <div class="bg-purple-300 p-2 rounded-xl max-w-xl">
+                   ${question}
+                 </div>
+               </div>`
+           );
+
+        input.value = "";
+
+        if (wrapper.classList.contains("flex-1")) {
+            wrapper.classList.remove("flex-1","justify-center","flex-col","items-center");
+            wrapper.classList.add("p-12", "border-t","justify-end");
+            }
+        if (form.classList.contains("flex-col")) {
+            form.classList.remove("flex-col","max-w-xl");
+            }
+        const res = await fetch("http://127.0.0.1:5000/ask", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                 question: question,
+                 conversation_id: conversationId
+                 })
+        });
+
+        const data = await res.json();
+        if (conversationId === null) {
+        conversationId = data.conversation_id;}
+
+        chat.insertAdjacentHTML("beforeend",
+              `<div class="flex justify-start">
+                 <div class="bg-gray-200 p-2 rounded-xl max-w-xl">
+                   ${data.answer}
+                 </div>
+               </div>`
+            );
+
+    }
+    </script>
+
+</body>
+</html>

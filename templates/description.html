@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-neutral-50">
+
+<div class="flex h-screen">
+
+ <!-- Sidebar -->
+    <aside class="w-64 bg-neutral-100 text-black p-4 flex flex-col border-r border-gray-300">
+        <nav class="flex flex-col gap-2">
+            <a href="/" class="text-lg font-bold  p-2" >RAG Assistant</a>
+            <a href="/" class="p-2 rounded hover:bg-purple-300">Zadaj pytanie </a>
+            <a href="/upload" class=" p-2 rounded hover:bg-purple-300">Dodaj plik do bazy wiedzy
+            </a>
+            <a href="/view_docs" class="p-2 rounded hover:bg-purple-300">Baza wiedzy  </a>
+            <a href="/history" class="p-2 rounded hover:bg-purple-300">Historia pytań</a>
+            <a href="/description" class="p-2 rounded hover:bg-purple-300">O projekcie </a>
+        </nav>
+
+    </aside>
+     <main class="flex-1 flex flex-col min-h-0 p-2">
+            <h2 class="text-xl font-semibold mb-2  text-center">
+             OPIS PROJEKTU
+            </h2>
+         <div class="h-full overflow-y-auto px-10 pb-7   ">
+
+            <div class="text-justify">
+                <b>RAG Assistant</b> to aplikacja webowa umożliwiająca analizę dokumentów PDF z wykorzystaniem technologii Retrieval-Augmented Generation (RAG).
+             Użytkownik może przesłać własne dokumenty, a następnie zadawać pytania dotyczące ich treści. Odpowiedzi są generowane przez model językowy na podstawie fragmentów odnalezionych w przesłanych dokumentach,
+             co zwiększa ich trafność i ogranicza ryzyko generowania nieprawdziwych informacji.
+             </div>
+             <hr class="my-4 border-gray-300">
+         <div >Najważniejsze funkcjonalności:
+            <div class="h-4"> </div>
+             <ul class="list-disc pl-6 space-y-2">
+                 <li>Przesyłanie dokumentów PDF, TXT, DOCX.</li>
+                 <li>Automatyczne przetwarzanie dokumentów i podział na mniejsze fragmenty.</li>
+                 <li>Tworzenie embeddingów oraz zapis danych w bazie wektorowej ChromaDB.</li>
+                 <li>Przegląd dodanych dokumentów oraz możliwośc ich usunięcia. </li>
+                 <li>Wyszukiwanie semantyczne najbardziej trafnych fragmentów dokumentów.</li>
+                 <li>Generowanie odpowiedzi przez model językowy na podstawie odnalezionego kontekstu.</li>
+                 <li>Zapisywanie historii rozmów w bazie SQLite.</li>
+                 <li>Automatyczne generowanie tytułów rozmów.</li>
+                 <li>Przeglądanie zapisanych konwersacji.</li>
+                 <li>Usuwanie rozmów wraz z powiązanymi wiadomościami.</li>
+                 <li>Intuicyjny interfejs użytkownika zbudowany przy użyciu Flask i Tailwind CSS.</li>
+             </ul>
+         </div>
+             <hr class="my-4 border-gray-300">
+         <div>Wykorzystane technologie:
+             <div class="h-4"> </div>
+             <ul class="list-disc pl-6 space-y-2">
+                 <b>Backend</b>
+                    <ul class="list-disc pl-6 space-y-2">
+                     <li>Python</li>
+                     <li>Flask</li>
+                     <li>LangChain</li>
+                    </ul>
+                 <b>AI</b>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>OpenAI API</li>
+                        <li>Hugging Face Embeddings</li>
+                    </ul>
+                 <b>Bazy danych</b>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>SQLite – historia rozmów</li>
+                        <li>ChromaDB – baza wektorowa dokumentów</li>
+                    </ul>
+                <b>Frontend</b>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>HTML</li>
+                        <li>Tailwind CSS</li>
+                        <li>JavaScript</li>
+                    </ul>
+             </ul>
+             </div>
+
+
+              </div>
+     </main>
+
+</div>
+</body>
+</html>

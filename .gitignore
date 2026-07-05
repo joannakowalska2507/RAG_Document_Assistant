@@ -1,0 +1,10 @@
+# virtual environment
+.venv/
+
+# environment variables
+.env
+
+# cache
+__pycache__/
+*.pyc
+chroma_db/
