@@ -60,7 +60,7 @@ OPENAI_API_KEY=your_api_key_here
 
 ### 4.Build and start the application
 ```bash
-docker cdocker compose up --build
+docker compose up --build
 ```
 ### 5.Open the application
 - After successful startup, open your browser:
