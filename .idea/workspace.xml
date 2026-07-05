@@ -4,36 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02112ab5-b756-4b3e-a24c-212445c989bd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/RAG_Document_Assistant.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/file_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rag/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rag/chat_chain.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rag/llm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rag/load_file.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rag/processor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rag/splitter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rag/title_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rag/vector_store.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/description.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/history.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/upload.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/view_conv.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/view_docs.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
-    </list>
+    <list default="true" id="02112ab5-b756-4b3e-a24c-212445c989bd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,7 +88,7 @@
       <workItem from="1780900663827" duration="27974000" />
       <workItem from="1781163711819" duration="864000" />
       <workItem from="1782937013312" duration="959000" />
-      <workItem from="1783155179263" duration="24518000" />
+      <workItem from="1783155179263" duration="24838000" />
     </task>
     <servers />
   </component>
